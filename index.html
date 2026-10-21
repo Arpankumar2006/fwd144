@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostify - Student & Admin Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-bar">
+        <hgroup>
+            <h1>Hostify Services</h1>
+            <p>SAU Campus Hostel Maintenance Request Portal</p>
+        </hgroup>
+        <nav>
+            <a href="index.html">Home</a> |
+            <a href="about.html">About Portal</a> |
+            <a href="contact.html">Contact Us</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="notice">
+            <h2>Welcome Students & Staff</h2>
+            <p>Please select your login type below to submit or process hostel complaints.</p>
+            <p><em>Note: Keep your generated OTP ready during room service visits.</em></p>
+        </section>
+
+        <section class="login-card">
+            <form action="#" method="POST">
+                <fieldset>
+                    <legend>Portal Login</legend>
+
+                    <p>
+                        <label for="role"><strong>I am logging in as:</strong></label><br>
+                        <select id="role" name="role" required>
+                            <option value="student">Student</option>
+                            <option value="admin">Hostel Manager / Admin</option>
+                        </select>
+                    </p>
+                    <div class="input-block">
+                        <p>
+                            <label for="sname">Full Name</label><br>
+                            <input type="text" id="sname" name="student_name" placeholder="Arpan Kumar">
+                        </p>
+                        <p>
+                            <label for="roll">Roll Number</label><br>
+                            <input type="text" id="roll" name="roll_number" placeholder="SAU/BTECH/FET/144">
+                        </p>
+                    </div>
+                    <div class="input-block">
+                        <p>
+                            <label for="aemail">Admin Email</label><br>
+                            <input type="email" id="aemail" name="admin_email" placeholder="admin@hostel.sau.ac.in">
+                        </p>
+                        <p>
+                            <label for="apass">Password</label><br>
+                            <input type="password" id="apass" name="admin_password" placeholder="Enter password">
+                        </p>
+                    </div>
+
+                    <p>
+                        <button type="submit">Sign In</button>
+                        <button type="reset">Clear</button>
+                    </p>
+                </fieldset>
+            </form>
+        </section>
+        <section class="service-info">
+            <h2>Supported Requests</h2>
+            <table border="1" class="info-table">
+                <tr>
+                    <th>Category</th>
+                    <th>Supported Issues</th>
+                </tr>
+                <tr>
+                    <td><strong>Electrical</strong></td>
+                    <td>Fan repair, tube light, socket replacement, switch fault</td>
+                </tr>
+                <tr>
+                    <td><strong>Plumbing</strong></td>
+                    <td>Tap leakage, basin blockage, shower leak, pipe repair</td>
+                </tr>
+                <tr>
+                    <td><strong>Housekeeping</strong></td>
+                    <td>Room cleaning, dustbin disposal, corridor maintenance</td>
+                </tr>
+            </table>
+        </section>
+
+    </main>
+    <footer>
+        <hr>
+        <address>
+            <strong>Hostify Helpdesk</strong><br>
+            Department of Computer Science, South Asian University<br>
+            Email: <a href="mailto:contact@hostify.sau.ac.in">contact@hostify.sau.ac.in</a>
+        </address>
+    </footer>
+
+</body>
+</html>
