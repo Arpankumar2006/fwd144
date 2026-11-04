@@ -3,100 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hostify - Student & Admin Portal</title>
+    <title>Hostify - SAU Campus Hostel Portal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header class="top-bar">
-        <hgroup>
-            <h1>Hostify Services</h1>
-            <p>SAU Campus Hostel Maintenance Request Portal</p>
-        </hgroup>
-        <nav>
-            <a href="index.html">Home</a> |
-            <a href="about.html">About Portal</a> |
-            <a href="contact.html">Contact Us</a>
-        </nav>
+        <div class="header-container">
+            <hgroup>
+                <h1>Hostify Services</h1>
+                <p>SAU Campus Hostel Maintenance Request Portal</p>
+            </hgroup>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-btn active">Home</a>
+                <a href="about.html" class="nav-btn">About Portal</a>
+                <a href="contact.html" class="nav-btn">Contact Us</a>
+                <a href="#" onclick="showDashboardView()" class="nav-btn" id="nav-dashboard" style="display: none;">Dashboard</a>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <section class="notice">
-            <h2>Welcome Students & Staff</h2>
-            <p>Please select your login type below to submit or process hostel complaints.</p>
-            <p><em>Note: Keep your generated OTP ready during room service visits.</em></p>
+        <!-- HOME VIEW -->
+        <section id="view-home" class="view-section">
+            <div class="content-card">
+                <h2>Welcome Students & Staff 👋</h2>
+                <p>Sign in below or explore portal help, statistics, and FAQs for South Asian University hostel maintenance services.</p>
+                
+                <div class="feature-grid">
+                    <div class="feat-box">
+                        <h3>⚡ Fast Resolution</h3>
+                        <p>Track electrical, plumbing, and housekeeping complaints in real-time with automated updates.</p>
+                    </div>
+                    <div class="feat-box">
+                        <h3>🔐 Secure 4-Digit OTP</h3>
+                        <p>Every ticket generates a unique verification code to ensure secure service closure.</p>
+                    </div>
+                    <div class="feat-box">
+                        <h3>📍 Location Office</h3>
+                        <p>Warden office Hostel block south asian university[cite: 1]</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOGIN CARD -->
+            <div class="login-card" id="login-section">
+                <form id="loginForm">
+                    <fieldset>
+                        <legend>Portal Sign In</legend>
+                        <div class="form-group">
+                            <label for="login-name">Full Name</label>
+                            <input type="text" id="login-name" placeholder="Arpan Kumar" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-id">Roll Number / Login ID</label>
+                            <input type="text" id="login-id" placeholder="SAU/BTECH/FET/144" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit">Sign In to Dashboard</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <!-- FAQ SECTION -->
+            <div class="content-card" style="margin-top: 24px;">
+                <h3>Frequently Asked Questions</h3>
+                <details class="faq-item">
+                    <summary>How do I reset or find my maintenance OTP?</summary>
+                    <p>Your unique 4-digit verification OTP is automatically generated upon submitting a service request and can be viewed anytime in your history table.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What is the turnaround time for electrical complaints?</summary>
+                    <p>Standard electrical repairs are addressed within 24 hours during working hours by the maintenance cell.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Where is the central office located?</summary>
+                    <p>Warden office Hostel block south asian university[cite: 1].</p>
+                </details>
+            </div>
         </section>
 
-        <section class="login-card">
-            <form action="#" method="POST">
-                <fieldset>
-                    <legend>Portal Login</legend>
+        <!-- DASHBOARD SECTION (Hidden by default until login) -->
+        <section id="view-dashboard" class="view-section" style="display: none;">
+            <div class="content-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #d0e1f9; padding-bottom: 12px; margin-bottom: 20px;">
+                    <div>
+                        <h2 style="margin: 0;">Welcome, <span id="user-display">Student</span>! 🎉</h2>
+                        <small style="color: #4a6984;">ID: <span id="id-display"></span> | Location: Warden office Hostel block south asian university[cite: 1]</small>
+                    </div>
+                    <button type="button" class="btn-secondary" onclick="logoutUser()" style="padding: 6px 14px; font-size: 12px;">Sign Out</button>
+                </div>
 
-                    <p>
-                        <label for="role"><strong>I am logging in as:</strong></label><br>
-                        <select id="role" name="role" required>
-                            <option value="student">Student</option>
-                            <option value="admin">Hostel Manager / Admin</option>
+                <h3>Submit Maintenance Service Request</h3>
+                <form id="requestForm">
+                    <div class="form-group">
+                        <label for="req-cat">Issue Category</label>
+                        <select id="req-cat" required>
+                            <option value="Electrical">⚡ Electrical (Fan, Light, Sockets)</option>
+                            <option value="Plumbing">🚰 Plumbing (Tap, Pipes, Shower)</option>
+                            <option value="Housekeeping">🧹 Housekeeping (Cleaning, Disposal)</option>
                         </select>
-                    </p>
-                    <div class="input-block">
-                        <p>
-                            <label for="sname">Full Name</label><br>
-                            <input type="text" id="sname" name="student_name" placeholder="Arpan Kumar">
-                        </p>
-                        <p>
-                            <label for="roll">Roll Number</label><br>
-                            <input type="text" id="roll" name="roll_number" placeholder="SAU/BTECH/FET/144">
-                        </p>
                     </div>
-                    <div class="input-block">
-                        <p>
-                            <label for="aemail">Admin Email</label><br>
-                            <input type="email" id="aemail" name="admin_email" placeholder="admin@hostel.sau.ac.in">
-                        </p>
-                        <p>
-                            <label for="apass">Password</label><br>
-                            <input type="password" id="apass" name="admin_password" placeholder="Enter password">
-                        </p>
+                    <div class="form-group">
+                        <label for="req-room">Room Number</label>
+                        <input type="text" id="req-room" placeholder="e.g. Block B, Room 304" required>
                     </div>
+                    <div class="form-group">
+                        <label for="req-desc">Issue Description (Max 200 words)</label>
+                        <textarea id="req-desc" rows="4" placeholder="Describe the problem..." required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit">Submit Request & Generate OTP</button>
+                    </div>
+                </form>
 
-                    <p>
-                        <button type="submit">Sign In</button>
-                        <button type="reset">Clear</button>
-                    </p>
-                </fieldset>
-            </form>
-        </section>
-        <section class="service-info">
-            <h2>Supported Requests</h2>
-            <table border="1" class="info-table">
-                <tr>
-                    <th>Category</th>
-                    <th>Supported Issues</th>
-                </tr>
-                <tr>
-                    <td><strong>Electrical</strong></td>
-                    <td>Fan repair, tube light, socket replacement, switch fault</td>
-                </tr>
-                <tr>
-                    <td><strong>Plumbing</strong></td>
-                    <td>Tap leakage, basin blockage, shower leak, pipe repair</td>
-                </tr>
-                <tr>
-                    <td><strong>Housekeeping</strong></td>
-                    <td>Room cleaning, dustbin disposal, corridor maintenance</td>
-                </tr>
-            </table>
-        </section>
+                <!-- Latest Request OTP Card -->
+                <div id="otp-card-container" style="display: none; margin-top: 20px;">
+                    <div class="otp-card">
+                        <div style="font-size: 13px; color: #b9d7ea;">LATEST REQUEST VERIFICATION OTP</div>
+                        <div class="otp-code" id="latest-otp">----</div>
+                        <small>Keep this ready to share with maintenance staff upon completion at Warden office Hostel block south asian university[cite: 1].</small>
+                    </div>
+                </div>
 
+                <!-- Request History & Data Review -->
+                <div style="margin-top: 30px;">
+                    <h3>Review All Requests Sent From This Account</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Ticket ID</th>
+                                    <th>Category</th>
+                                    <th>Room</th>
+                                    <th>Description</th>
+                                    <th>OTP</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-tbody">
+                                <!-- Populated dynamically via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+
     <footer>
-        <hr>
         <address>
-            <strong>Hostify Helpdesk</strong><br>
-            Department of Computer Science, South Asian University<br>
-            Email: <a href="mailto:contact@hostify.sau.ac.in">contact@hostify.sau.ac.in</a>
+            <strong>Hostify Helpdesk</strong> — Warden office Hostel block south asian university[cite: 1]<br>
+            Email: <a href="mailto:contact@hostify.sau.ac.in">contact@hostify.sau.ac.in</a>[cite: 1]
         </address>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
