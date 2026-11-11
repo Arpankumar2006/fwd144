@@ -1,0 +1,109 @@
+* { box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 0 0 40px 0;
+    background-color: #ebf3fa; color: #0d2137; line-height: 1.6;
+}
+.top-bar {
+    background-color: #0d2137; color: #ffffff;
+    padding: 25px 20px 15px; border-top: 6px solid #2575fc;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+.header-container { max-width: 900px; margin: 0 auto; text-align: center; }
+.top-bar h1 { margin: 0 0 4px 0; font-size: 30px; font-weight: 700; }
+.top-bar p { margin: 0 0 15px 0; font-size: 14px; color: #b9d7ea; }
+.nav-links { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+.nav-btn {
+    background: rgba(255,255,255,0.1); color: #ffffff; padding: 6px 14px;
+    border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: 600;
+    transition: background 0.2s; cursor: pointer;
+}
+.nav-btn:hover, .nav-btn.active { background: #2575fc; }
+.nav-btn.btn-logout { background-color: #d9534f; }
+.nav-btn.btn-logout:hover { background-color: #c9302c; }
+
+main {
+    display: flex; flex-direction: column; gap: 24px;
+    margin-top: 24px; max-width: 900px; padding: 0 20px;
+    margin-left: auto; margin-right: auto;
+}
+.content-card, .login-card {
+    background-color: #ffffff; padding: 24px; border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(13, 33, 55, 0.06);
+}
+.dashboard-header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid #d0e1f9; padding-bottom: 12px; margin-bottom: 20px;
+}
+
+fieldset {
+    border: 2px solid #0d2137; padding: 20px 24px;
+    background-color: #f8fafc; border-radius: 6px; margin: 0;
+}
+legend { font-weight: 700; color: #0d2137; padding: 0 10px; font-size: 17px; }
+.form-group { margin-bottom: 16px; }
+label { display: inline-block; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #0d2137; }
+input[type="text"], input[type="password"], input[type="email"], textarea, select {
+    width: 100%; padding: 10px 12px; border: 1px solid #769fcd;
+    border-radius: 5px; background-color: #ffffff; font-size: 14px; outline: none; font-family: inherit;
+}
+input:focus, select:focus, textarea:focus {
+    border-color: #2575fc; box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.15);
+}
+
+/* Polished Admin Passcode Box */
+.passcode-group {
+    background: linear-gradient(135deg, #f0f5fc 0%, #e2eefc 100%);
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #769fcd;
+    margin-top: 15px;
+    display: none;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
+}
+.passcode-group label {
+    color: #0d2137;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.passcode-group input[type="password"] {
+    background-color: #ffffff;
+    border: 1px solid #2575fc;
+}
+.passcode-hint {
+    color: #4a6984;
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+}
+
+.form-actions { margin-top: 20px; }
+button {
+    border: none; padding: 11px 22px; font-size: 14px; font-weight: 700;
+    cursor: pointer; border-radius: 5px; background-color: #0d2137; color: #ffffff;
+    transition: background-color 0.2s ease;
+}
+button:hover { background-color: #2575fc; }
+
+.otp-card {
+    background: #0d2137; color: #ffffff; padding: 15px; text-align: center;
+    border-radius: 6px; margin-top: 15px;
+}
+.otp-code { font-size: 28px; font-weight: bold; letter-spacing: 5px; color: #ffb400; margin: 5px 0; }
+.history-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+.history-table th, .history-table td {
+    border: 1px solid #d0e1f9; padding: 10px; text-align: left; font-size: 13px;
+}
+.history-table th { background-color: #0d2137; color: #ffffff; }
+
+.star-rating {
+    display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 5px; font-size: 26px;
+}
+.star-rating input { display: none; }
+.star-rating label { color: #d0e1f9; cursor: pointer; transition: color 0.2s; }
+.star-rating input:checked ~ label, .star-rating label:hover, .star-rating label:hover ~ label { color: #ffb400; }
+
+footer { text-align: center; margin-top: 40px; padding: 20px 10px 0; border-top: 1px solid #d0e1f9; font-size: 13px; color: #4a6984; }
+address { font-style: normal; }
