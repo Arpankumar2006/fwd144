@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Hostify</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="header-container">
+            <hgroup>
+                <h1>Hostify Services</h1>
+                <p>SAU Campus Hostel Maintenance Request Portal</p>
+            </hgroup>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-btn">Home</a>
+                <a href="about.html" class="nav-btn">About Portal</a>
+                <a href="contact.html" class="nav-btn active">Contact Us</a>
+                <a href="index.html" onclick="showDashboardView()" class="nav-btn" id="nav-dashboard" style="display: none;">Dashboard</a>
+                <a href="#" onclick="logoutUser()" class="nav-btn btn-logout" id="nav-logout" style="display: none;">Sign Out</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-card">
+            <h2>Contact Us</h2>
+            <p>Reach out to our hostel administration or drop a query below.</p>
+            <address style="margin-bottom: 20px; line-height: 1.8;">
+                <strong>Office Location:</strong> Warden office Hostel block south asian university[cite: 1]<br>
+                <strong>Email:</strong> contact@hostify.sau.ac.in[cite: 1]<br>
+                <strong>Helpdesk Hours:</strong> Mon - Sat (9:00 AM - 6:00 PM)
+            </address>
+
+            <h3>Send a Query</h3>
+            <form id="queryForm">
+                <div class="form-group">
+                    <label for="q-name">Your Name</label>
+                    <input type="text" id="q-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="q-email">Email Address</label>
+                    <input type="email" id="q-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="q-msg">Query / Message</label>
+                    <textarea id="q-msg" rows="4" required></textarea>
+                </div>
+                <button type="submit">Send Query</button>
+            </form>
+            <div id="query-success" style="display:none; color: #2ecc71; margin-top: 10px; font-weight: bold;">Your query has been submitted successfully!</div>
+        </section>
+    </main>
+
+    <footer>
+        <address>
+            <strong>Hostify Helpdesk</strong> — Warden office Hostel block south asian university[cite: 1]<br>
+            Email: <a href="mailto:contact@hostify.sau.ac.in">contact@hostify.sau.ac.in</a>[cite: 1]
+        </address>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
