@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Hostify</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="header-container">
+            <hgroup>
+                <h1>Hostify Services</h1>
+                <p>SAU Campus Hostel Maintenance Request Portal</p>
+            </hgroup>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-btn">Home</a>
+                <a href="about.html" class="nav-btn active">About Portal</a>
+                <a href="contact.html" class="nav-btn">Contact Us</a>
+                <a href="index.html" onclick="showDashboardView()" class="nav-btn" id="nav-dashboard" style="display: none;">Dashboard</a>
+                <a href="#" onclick="logoutUser()" class="nav-btn btn-logout" id="nav-logout" style="display: none;">Sign Out</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-card">
+            <h2>About Hostify Portal</h2>
+            <p>Hostify is an advanced maintenance coordination platform built exclusively for South Asian University students and residential staff. It streamlines lodging, tracking, and resolving hostel infrastructure grievances.</p>
+            
+            <h3 style="margin-top: 25px;">Service Feedback & Rating</h3>
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label>Rate Your Experience</label>
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1" required><label for="star1">★</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fb-text">Detailed Feedback / Suggestions</label>
+                    <textarea id="fb-text" rows="3" placeholder="Tell us how we can improve portal services..." required></textarea>
+                </div>
+                <button type="submit">Submit Feedback</button>
+            </form>
+            <div id="feedback-success" style="display:none; color: #2ecc71; margin-top: 10px; font-weight: bold;">Thank you for your valuable feedback!</div>
+        </section>
+    </main>
+
+    <footer>
+        <address>
+            <strong>Hostify Helpdesk</strong> — Warden office Hostel block south asian university[cite: 1]<br>
+            Email: <a href="mailto:contact@hostify.sau.ac.in">contact@hostify.sau.ac.in</a>[cite: 1]
+        </address>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
