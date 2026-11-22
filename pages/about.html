@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Hostify</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
@@ -15,11 +15,11 @@
                 <p>SAU Campus Hostel Maintenance Request Portal</p>
             </hgroup>
             <nav class="nav-links">
-                <a href="index.html" class="nav-btn">Home</a>
+                <a href="../index.html" class="nav-btn">Home</a>
                 <a href="about.html" class="nav-btn active">About Portal</a>
                 <a href="contact.html" class="nav-btn">Contact Us</a>
-                <a href="index.html" onclick="showDashboardView()" class="nav-btn" id="nav-dashboard" style="display: none;">Dashboard</a>
-                <a href="#" onclick="logoutUser()" class="nav-btn btn-logout" id="nav-logout" style="display: none;">Sign Out</a>
+                <a href="../index.html" onclick="showDashboardView()" class="nav-btn" id="nav-dashboard" hidden>Dashboard</a>
+                <a href="#" onclick="logoutUser(event)" class="nav-btn btn-logout" id="nav-logout" hidden>Sign Out</a>
             </nav>
         </div>
     </header>
@@ -53,11 +53,11 @@
 
     <footer>
         <address>
-            <strong>Hostify Helpdesk</strong> — Warden office Hostel block south asian university[cite: 1]<br>
-            Email: <a href="mailto:contact@hostify.sau.ac.in">contact@hostify.sau.ac.in</a>[cite: 1]
+            <strong>Hostify Helpdesk</strong> — Warden office, Hostel block, South Asian University<br>
+            Email: <a href="mailto:contact@hostify.sau.ac.in">contact@hostify.sau.ac.in</a>
         </address>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>
