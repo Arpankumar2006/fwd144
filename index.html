@@ -7,159 +7,307 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
     <header class="top-bar">
         <div class="header-container">
             <hgroup>
                 <h1>Hostify Services</h1>
                 <p>SAU Campus Hostel Maintenance Request Portal</p>
             </hgroup>
-            <nav class="nav-links">
+            <nav class="nav-links" aria-label="Main navigation">
                 <a href="index.html" class="nav-btn active">Home</a>
-                <a href="about.html" class="nav-btn">About Portal</a>
-                <a href="contact.html" class="nav-btn">Contact Us</a>
-                <a href="#" onclick="showDashboardView()" class="nav-btn" id="nav-dashboard" style="display: none;">Dashboard</a>
-                <a href="#" onclick="logoutUser()" class="nav-btn btn-logout" id="nav-logout" style="display: none;">Sign Out</a>
+                <a href="pages/about.html" class="nav-btn">About Portal</a>
+                <a href="pages/contact.html" class="nav-btn">Contact Us</a>
+                <a href="#dashboard" class="nav-btn" id="nav-dashboard" hidden>Dashboard</a>
+                <button type="button" class="nav-btn btn-logout" id="nav-logout" hidden>Sign Out</button>
             </nav>
         </div>
     </header>
 
     <main>
-        <!-- HOME / LOGIN VIEW -->
         <section id="view-home" class="view-section">
             <div class="content-card">
-                <h2>Welcome Students & Staff 👋</h2>
-                <p>Sign in below to lodge and track maintenance grievances for South Asian University hostels.</p>
+                <span class="hero-eyebrow">SAU Hostel Services</span>
+                <h2>Hostel Maintenance Portal</h2>
+                <p>Sign in or create a student account to submit and track a hostel maintenance request.</p>
             </div>
 
-            <!-- LOGIN CARD WITH ROLE DROPDOWN -->
-            <div class="login-card" id="login-section">
-                <form id="loginForm">
-                    <fieldset>
-                        <legend>Portal Sign In</legend>
-                        <div class="form-group">
-                            <label for="login-role">Select Role</label>
-                            <select id="login-role" onchange="toggleRoleFields()" required>
-                                <option value="student">Student</option>
-                                <option value="admin">Admin / Warden</option>
-                            </select>
-                        </div>
-                        <div class="form-group" id="field-name">
-                            <label for="login-name">Full Name</label>
-                            <input type="text" id="login-name" placeholder="Arpan Kumar">
-                        </div>
-                        <div class="form-group" id="field-id">
-                            <label for="login-id">Roll Number / Login ID</label>
-                            <input type="text" id="login-id" placeholder="SAU/BTECH/FET/144">
-                        </div>
-                        <div class="form-group passcode-group" id="field-passcode">
-                            <label for="admin-pass">🔐 Admin Passcode</label>
-                            <input type="password" id="admin-pass" placeholder="Enter warden passcode">
-                            <small class="passcode-hint">Default test passcode: admin123</small>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit">Sign In to Dashboard</button>
-                        </div>
-                    </fieldset>
+            <section class="login-card" id="login-section" aria-labelledby="signin-heading">
+                <h2 id="signin-heading">Portal Sign In</h2>
+                <div class="form-group">
+                    <label for="login-role">I am signing in as</label>
+                    <select id="login-role" required>
+                        <option value="">Choose a role</option>
+                        <option value="student">Student</option>
+                        <option value="admin">Admin / Warden</option>
+                    </select>
+                </div>
+
+                <div id="student-auth" hidden>
+                    <div class="mode-switch" role="group" aria-label="Student account action">
+                        <button type="button" class="mode-button active" data-mode="login">Student Log In</button>
+                        <button type="button" class="mode-button" data-mode="signup">Create Student Account</button>
+                    </div>
+                    <p class="muted" id="student-mode-help">Use the email and password registered on this browser.</p>
+                </div>
+
+                <form id="authForm" novalidate>
+                    <div class="form-group" id="auth-name-group" hidden>
+                        <label for="auth-name">Full name</label>
+                        <input type="text" id="auth-name" autocomplete="name" maxlength="100">
+                    </div>
+                    <div class="form-group" id="auth-block-group" hidden>
+                        <label for="auth-block">Block</label>
+                        <select id="auth-block">
+                            <option value="">Choose a block</option>
+                            <option value="A">Block A</option>
+                            <option value="B">Block B</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="auth-tower-group" hidden>
+                        <label for="auth-tower">Tower number</label>
+                        <select id="auth-tower" disabled>
+                            <option value="">Choose a block first</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="auth-room-group" hidden>
+                        <label for="auth-room">Room number</label>
+                        <input type="text" id="auth-room" autocomplete="off" maxlength="20" pattern="[A-Za-z0-9]+" placeholder="e.g. A304">
+                    </div>
+                    <div class="form-group" id="auth-email-group" hidden>
+                        <label for="auth-email">Email address</label>
+                        <input type="email" id="auth-email" autocomplete="username" maxlength="254">
+                    </div>
+                    <div class="form-group" id="auth-password-group" hidden>
+                        <label for="auth-password">Password</label>
+                        <input type="password" id="auth-password" autocomplete="current-password" minlength="6">
+                    </div>
+                    <p class="notice" id="admin-credentials" hidden>Use the administrator credentials configured in the app code.</p>
+                    <p class="form-message" id="auth-message" role="status" aria-live="polite"></p>
+                    <button type="submit" id="auth-submit" hidden>Log In</button>
                 </form>
-            </div>
+                <p class="local-warning">This demo stores accounts and requests only in this browser. It is not secure for real credentials or private data.</p>
+            </section>
         </section>
 
-        <!-- DASHBOARD VIEW -->
-        <section id="view-dashboard" class="view-section" style="display: none;">
-            <div class="content-card">
+        <section id="home-content" class="home-content">
+            <section class="service-strip" aria-label="Hostify service highlights">
+                <article>
+                    <span class="service-icon">01</span>
+                    <div>
+                        <h3>Report any issue</h3>
+                        <p>Electrical, plumbing, housekeeping, or other campus maintenance concerns.</p>
+                    </div>
+                </article>
+                <article>
+                    <span class="service-icon">02</span>
+                    <div>
+                        <h3>Track every step</h3>
+                        <p>Stay informed from submission through scheduling and final completion.</p>
+                    </div>
+                </article>
+                <article>
+                    <span class="service-icon">03</span>
+                    <div>
+                        <h3>Keep campus connected</h3>
+                        <p>Fast coordination helps keep every hostel block safe and comfortable.</p>
+                    </div>
+                </article>
+            </section>
+
+            <section class="care-banner">
+                <div>
+                    <span class="care-kicker">A better place to live</span>
+                    <h2>Small issues resolved. Everyday life uninterrupted.</h2>
+                </div>
+                <p>Hostify brings students and hostel wardens together so maintenance requests receive attention quickly, transparently, and with care.</p>
+            </section>
+
+            <section class="process-section" aria-labelledby="process-heading">
+                <div class="section-heading">
+                    <span>How it works</span>
+                    <h2 id="process-heading">One simple path to a working hostel</h2>
+                </div>
+                <div class="process-grid">
+                    <article>
+                        <strong>1</strong>
+                        <h3>Create an account</h3>
+                        <p>Sign in as a student or use the warden portal to manage campus maintenance.</p>
+                    </article>
+                    <article>
+                        <strong>2</strong>
+                        <h3>Submit the request</h3>
+                        <p>Choose your block and tower, add details, and send your issue to the helpdesk.</p>
+                    </article>
+                    <article>
+                        <strong>3</strong>
+                        <h3>Follow the progress</h3>
+                        <p>Review updates, receive completion details, and share feedback about the service.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="faq-section" aria-labelledby="faq-heading">
+                <div class="section-heading">
+                    <span>Need help?</span>
+                    <h2 id="faq-heading">Frequently asked questions</h2>
+                </div>
+                <div class="faq-list">
+                    <details>
+                        <summary>Who can submit a maintenance request?</summary>
+                        <p>Students living in the South Asian University hostel can create a local student account and submit a request for their block and tower.</p>
+                    </details>
+                    <details>
+                        <summary>What kind of issues can I report?</summary>
+                        <p>You can report electrical, plumbing, housekeeping, and other hostel maintenance concerns. Please describe the issue clearly so the helpdesk can respond effectively.</p>
+                    </details>
+                    <details>
+                        <summary>How do I choose my block and tower?</summary>
+                        <p>Select Block A or Block B first. The tower list will then update automatically with A1-A5 or B1-B5, depending on the block you selected.</p>
+                    </details>
+                    <details>
+                        <summary>How can I follow the progress of a request?</summary>
+                        <p>After signing in as a student, open your dashboard. Your submitted requests show the current status, timeline, and any available completion information.</p>
+                    </details>
+                    <details>
+                        <summary>Where is my account and request information stored?</summary>
+                        <p>Hostify is a local demo, so accounts, requests, and feedback are stored in this browser. They do not change the project code or appear on another browser or device.</p>
+                    </details>
+                    <details>
+                        <summary>How does the admin review requests?</summary>
+                        <p>The administrator can sign in through the Warden account, view pending and completed requests, update progress, schedule visits, and manage feedback or contact logs.</p>
+                    </details>
+                </div>
+            </section>
+        </section>
+
+        <section id="view-dashboard" class="view-section" hidden>
+            <section class="content-card" id="dashboard">
                 <div class="dashboard-header">
                     <div>
-                        <h2 style="margin: 0;">Welcome, <span id="user-display">User</span>! 🎉</h2>
-                        <small style="color: #4a6984;">Role: <span id="role-display" style="font-weight: bold; text-transform: uppercase;"></span> | Location: Warden office Hostel block south asian university[cite: 1]</small>
+                        <h2 class="welcome-heading">Welcome, <span id="user-display"></span></h2>
+                        <p class="muted" id="role-display"></p>
                     </div>
-                    <button type="button" class="nav-btn btn-logout" onclick="logoutUser()" style="padding: 6px 14px; font-size: 12px;">Sign Out</button>
+                    <button type="button" class="btn-logout dashboard-logout" id="dashboard-logout">Sign Out</button>
                 </div>
 
-                <!-- STUDENT SUBMISSION PANEL -->
-                <div id="student-panel" style="display: none;">
-                    <h3>Submit Maintenance Service Request</h3>
+                <section id="student-panel" hidden>
+                    <h3>Submit a maintenance request</h3>
                     <form id="requestForm">
                         <div class="form-group">
-                            <label for="req-cat">Issue Category</label>
+                            <label for="req-cat">Issue category</label>
                             <select id="req-cat" required>
-                                <option value="Electrical">⚡ Electrical (Fan, Light, Sockets)</option>
-                                <option value="Plumbing">🚰 Plumbing (Tap, Pipes, Shower)</option>
-                                <option value="Housekeeping">🧹 Housekeeping (Cleaning, Disposal)</option>
+                                <option value="">Choose a category</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="Plumbing">Plumbing</option>
+                                <option value="Housekeeping">Housekeeping</option>
+                            </select>
+                        </div>
+                        <div class="location-fields account-location" aria-label="Registered room location">
+                            <div class="form-group">
+                                <label for="profile-block">Block</label>
+                                <input type="text" id="profile-block" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-tower">Tower number</label>
+                                <input type="text" id="profile-tower" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-room">Room number</label>
+                                <input type="text" id="profile-room" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Photo of the issue (optional)</label>
+                            <div class="image-upload-actions">
+                                <button type="button" class="secondary-button" id="upload-image-button">Upload an image</button>
+                                <input class="visually-hidden-input" type="file" id="req-image" accept="image/*" tabindex="-1">
+                                <button type="button" class="secondary-button" id="capture-image-button">Take a photo</button>
+                                <input class="visually-hidden-input" type="file" id="req-camera" accept="image/*" capture="environment" tabindex="-1">
+                            </div>
+                            <small class="muted">Use your camera on a phone or choose an image from your device. Images are resized before saving.</small>
+                            <div class="image-preview" id="request-image-preview" hidden>
+                                <img id="request-image-thumbnail" alt="Preview of the attached issue photo">
+                                <div>
+                                    <span id="request-image-name" class="muted"></span>
+                                    <button type="button" class="secondary-button" id="remove-image-button">Remove image</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="req-desc">Describe the issue (maximum 200 words)</label>
+                            <textarea id="req-desc" rows="5" placeholder="Describe the issue and when it occurs..." required></textarea>
+                            <small class="muted"><span id="word-count">0</span>/200 words</small>
+                        </div>
+                        <p class="form-message" id="request-message" role="status" aria-live="polite"></p>
+                        <button type="submit">Submit Request</button>
+                    </form>
+
+                    <div class="section-divider">
+                        <h3>Your requests</h3>
+                        <div id="student-requests" class="request-list"></div>
+                    </div>
+                </section>
+
+                <section id="admin-panel" hidden>
+                    <div class="admin-controls" aria-label="Request sorting and filters">
+                        <div class="form-group">
+                            <label for="admin-sort">Sort requests</label>
+                            <select id="admin-sort">
+                                <option value="oldest">Oldest to newest</option>
+                                <option value="newest">Newest to oldest</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="req-room">Room Number</label>
-                            <input type="text" id="req-room" placeholder="e.g. Block B, Room 304" required>
+                            <label for="admin-block-filter">Filter by block</label>
+                            <select id="admin-block-filter">
+                                <option value="">All blocks</option>
+                                <option value="A">Block A</option>
+                                <option value="B">Block B</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="req-desc">Issue Description</label>
-                            <textarea id="req-desc" rows="3" placeholder="Describe the problem..." required></textarea>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit">Submit Request & Generate OTP</button>
-                        </div>
-                    </form>
-
-                    <div id="otp-card-container" style="display: none; margin-top: 20px;">
-                        <div class="otp-card">
-                            <div style="font-size: 13px; color: #b9d7ea;">LATEST REQUEST VERIFICATION OTP</div>
-                            <div class="otp-code" id="latest-otp">----</div>
-                            <small>Keep this ready to share with maintenance staff upon completion at Warden office Hostel block south asian university[cite: 1].</small>
+                            <label for="admin-tower-filter">Filter by tower</label>
+                            <select id="admin-tower-filter" disabled>
+                                <option value="">All towers</option>
+                            </select>
                         </div>
                     </div>
-
-                    <div style="margin-top: 30px;">
-                        <h3>Your Submitted Requests</h3>
-                        <div style="overflow-x: auto;">
-                            <table class="history-table">
-                                <thead>
-                                    <tr>
-                                        <th>Ticket ID</th>
-                                        <th>Category</th>
-                                        <th>Room</th>
-                                        <th>Description</th>
-                                        <th>OTP</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="history-tbody"></tbody>
-                            </table>
+                    <h3>Pending requests</h3>
+                    <div id="admin-pending" class="request-list"></div>
+                    <div class="section-divider">
+                        <h3>Completed requests</h3>
+                        <div id="admin-completed" class="request-list"></div>
+                    </div>
+                    <div class="section-divider">
+                        <div class="log-section-header">
+                            <h3>Feedback and contact log</h3>
+                            <button type="button" class="danger-button" id="clear-message-logs">Clear all logs</button>
+                        </div>
+                        <p class="form-message" id="message-log-status" role="status" aria-live="polite"></p>
+                        <div class="message-log-grid">
+                            <section>
+                                <h4>Service feedback</h4>
+                                <div id="feedback-log" class="message-log"></div>
+                            </section>
+                            <section>
+                                <h4>Contact requests</h4>
+                                <div id="contact-log" class="message-log"></div>
+                            </section>
                         </div>
                     </div>
-                </div>
-
-                <!-- ADMIN CONTROL PANEL -->
-                <div id="admin-panel" style="display: none;">
-                    <h3>Warden / Admin Control Dashboard</h3>
-                    <p>Review and manage all pending hostel infrastructure complaints across campus.</p>
-                    <div style="overflow-x: auto; margin-top: 15px;">
-                        <table class="history-table">
-                            <thead>
-                                <tr>
-                                    <th>Ticket ID</th>
-                                    <th>Student ID</th>
-                                    <th>Category</th>
-                                    <th>Room & Description</th>
-                                    <th>OTP</th>
-                                    <th>Action / Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="admin-tbody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+                    <section id="admin-detail" class="detail-panel" hidden aria-live="polite"></section>
+                </section>
+            </section>
         </section>
     </main>
 
     <footer>
         <address>
-            <strong>Hostify Helpdesk</strong> — Warden office Hostel block south asian university[cite: 1]<br>
-            Email: <a href="mailto:contact@hostify.sau.ac.in">contact@hostify.sau.ac.in</a>[cite: 1]
+            <strong>Hostify Helpdesk</strong> — Warden office, Hostel block, South Asian University<br>
+            Email: <a href="mailto:contact@hostify.sau.ac.in">contact@hostify.sau.ac.in</a>
         </address>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
